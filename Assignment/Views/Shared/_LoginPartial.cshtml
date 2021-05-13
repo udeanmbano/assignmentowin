@@ -1,26 +1,23 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+@if (Request.IsAuthenticated == true)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
+
+
+
+    <li><a class="nav-link scrollto" href="~/Tbl_Category/Index">Categories</a></li>
+    <li><a class="nav-link scrollto" href="~/Tbl_Product/Index">Products</a></li>
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    { @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
     @Html.AntiForgeryToken()
+    <li><a class="nav-link scrollto" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
 
-<ul class="nav navbar-nav navbar-right">
-    <li>@Html.ActionLink("Categories", "Index", "Tbl_Category")</li>
-    <li>@Html.ActionLink("Products", "Index", "Tbl_Product")</li>
-
-    <li>
-        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-    </li>
-
-    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-</ul>
-    }
+}
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+<li><a class="nav-link scrollto" @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+<li><a class="nav-link scrollto" @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+
 }
+
